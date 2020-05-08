@@ -16,16 +16,16 @@ variable "vcn_cidr" {
 }
 
 provider "oci" {
-  tenancy_ocid     = "${var.tenancy_ocid}"
-  user_ocid        = "${var.user_ocid}"
-  fingerprint      = "${var.fingerprint}"
-  private_key_path = "${var.private_key_path}"
-  region           = "${var.region}"
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  fingerprint      = var.fingerprint
+  private_key_path = var.private_key_path
+  region           = var.region
 }
 
 module "vcn" {
   source           = "../../"
-  compartment_ocid = "${var.compartment_ocid}"
-  vcn_display_name = "${var.vcn_display_name}"
-  vcn_cidr         = "${var.vcn_cidr}"
+  compartment_ocid = var.compartment_ocid
+  vcn_display_name = var.vcn_display_name
+  vcn_cidr         = var.vcn_cidr
 }
