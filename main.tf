@@ -41,12 +41,12 @@ data "oci_identity_availability_domains" "this" {
 # Subnet
 ######################
 resource "oci_core_subnet" "this" {
-  count                      = length(data.oci_identity_availability_domains.this.availability_domains)
-  availability_domain        = lookup(data.oci_identity_availability_domains.this.availability_domains[count.index], "name")
-  cidr_block                 = cidrsubnet(var.vcn_cidr, ceil(log(length(data.oci_identity_availability_domains.this.availability_domains) * 2, 2)), count.index)
-  display_name               = "Default Subnet ${lookup(data.oci_identity_availability_domains.this.availability_domains[count.index], "name")}"
-  dns_label                  = var.subnet_dns_label}${count.index + 1
-  compartment_id             = var.compartment_ocid
-  vcn_id                     = oci_core_vcn.this.id
-  security_list_ids          = [oci_core_vcn.this.default_security_list_id]
+  count               = length(data.oci_identity_availability_domains.this.availability_domains)
+  availability_domain = lookup(data.oci_identity_availability_domains.this.availability_domains[count.index], "name")
+  cidr_block          = cidrsubnet(var.vcn_cidr, ceil(log(length(data.oci_identity_availability_domains.this.availability_domains) * 2, 2)), count.index)
+  display_name        = "Default Subnet ${lookup(data.oci_identity_availability_domains.this.availability_domains[count.index], "name")}"
+  dns_label           = "${var.subnet_dns_label}${count.index + 1}"
+  compartment_id      = var.compartment_ocid
+  vcn_id              = oci_core_vcn.this.id
+  security_list_ids   = [oci_core_vcn.this.default_security_list_id]
 }
