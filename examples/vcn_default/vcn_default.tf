@@ -29,3 +29,19 @@ module "vcn" {
   vcn_display_name = var.vcn_display_name
   vcn_cidr         = var.vcn_cidr
 }
+
+
+terraform {
+  backend "s3" {
+    endpoint                       = "https://cintra.compat.objectstorage.us-phoenix-1.oraclecloud.com"
+    skip_metadata_api_check        = true
+    skip_region_validation         = true
+    force_path_style               = true
+    skip_credentials_validation    = true
+    skip_bucket_versioning         = true
+    enable_lock_table_ssencryption = false
+    bucket                         = "tf-fk-test-01"
+    key                            = "terraform/state/oci/vcn/testVCN/terraform.tfstate"
+    region                         = "us-phoenix-1"
+  }
+}
