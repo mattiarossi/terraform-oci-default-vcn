@@ -8,6 +8,8 @@ It is supposed to be run from the OCI cloud console, and it does not require any
 
 # OCI
 
+## Oject Storage bucket
+
 Create an appropriate Object storage bucket in the compartment that is designed to be the [AWS S3 compatibility layer default](https://docs.cloud.oracle.com/en-us/iaas/Content/Object/Tasks/s3compatibleapi.htm#Viewing).
 
 By default this is the root OCI compartment. You can use the following command to retrieve the setting for your tenancy:
@@ -25,6 +27,29 @@ This command will create a bucket named tf-fk-test-02 in the AWS s3 compatibilit
 
 ```
 oci os bucket create --compartment-id ocid1.compartment.oc1..aaaaaaa...4nxhlvb3luoh3kpmffof6vba --name tf-fk-test-02
+```
+
+## AWS S3 Authorization credentials
+
+In order to be able to access the Object Storage bucket using the S3 compatibility layer, you need to generate a set of access credentials:
+
+### Retrieve my user ocid
+
+```
+export ME=<my OCI account name>
+```
+
+```
+oci iam user list --query "data[?\"name\"=='$ME']".{"name:\"name\",id:\"id\""} --output table
+
++------------------------------------------------------------------------------+------------------------+
+| id                                                                           | name                   |
++------------------------------------------------------------------------------+------------------------+
+| ocid1.user.oc1..aaaaaaa..................................tojgy2qybdkcayvnxsq | me@me.com              |
++------------------------------------------------------------------------------+------------------------+
+
+export OCIUID=ocid1.user.oc1..aaaaaaa..................................tojgy2qybdkcayvnxsq
+
 ```
 
 
