@@ -76,9 +76,9 @@ terraform {
 ```
 
 where:
-* <mytenancy> is your tenancy name
-* <region> is the region where you created the Object Storage bucket
-* <mybucket> is the name of the bucket you created
+* &lt;mytenancy&gt; is your tenancy name
+* &lt;region&gt; is the region where you created the Object Storage bucket
+* &lt;mybucket&gt; is the name of the bucket you created
 * key is the name of the bucket entry that will hold your terraform state file
 
 
