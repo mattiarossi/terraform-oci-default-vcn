@@ -52,6 +52,29 @@ export OCIUID=ocid1.user.oc1..aaaaaaa..................................tojgy2qyb
 
 ```
 
+### Create a custom secret
+
+```
+oci iam customer-secret-key create --user-id $OCIUID --display-name 'key-tf-test' --query "data".{"AWS_ACCESS_KEY_ID:\"id\",AWS_SECRET_ACCESS_KEY:\"key\""} --output=table
+
++------------------------------------------+----------------------------------------------+
+| AWS_ACCESS_KEY_ID                        | AWS_SECRET_ACCESS_KEY                        |
++------------------------------------------+----------------------------------------------+
+| fd9bcbb0.........................93e7139 | kS/...............................PRDoGX1NY= |
++------------------------------------------+----------------------------------------------+
+
+
+
+```
+
+### Set up environment variables:
+
+```
+export TF_VAR_tenancy_ocid=`cat /etc/oci/config  | grep tenancy | uniq | cut -d '=' -f 2`
+export AWS_ACCESS_KEY_ID=fd9bcbb0.........................93e7139
+export AWS_SECRET_ACCESS_KEY=kS/...............................PRDoGX1NY=
+```
+
 
 # Terraform
 Prepare one variable file named "terraform.tfvars" with the required information. The content of "terraform.tfvars" should look something like the following:
