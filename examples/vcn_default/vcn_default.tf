@@ -30,7 +30,7 @@ module "vcn" {
 
 terraform {
   backend "s3" {
-    endpoint                    = "https://cintra.compat.objectstorage.us-phoenix-1.oraclecloud.com"
+    endpoint                    = "https://mynamespace.compat.objectstorage.us-phoenix-1.oraclecloud.com"
     skip_metadata_api_check     = true
     skip_region_validation      = true
     force_path_style            = true
